@@ -1,18 +1,11 @@
-const express = require('express');
-const path = require('path');
-const app = express();
+const noteData = require('../db/notes');
 
-var PORT = process.env.PORT || 8080;
-
-
-app.use(express.urlencoded({extended: true}));
-app.use(express.json());
-
-//test server
-app.get('/', (req, res) => {
-    res.send(`sending info from port ${PORT}`);
-})
-
-app.listen(PORT, () => {
-    console.log(`listening from port http://localhost:${PORT}`)
-})
+module.exports = function(app){
+    app.get('/api/notes', (req, res) => {
+        res.json(noteData);
+    });
+    app.post('/api/notes', (req, res) => {
+        noteData.push(req.body);
+        res.send(true);
+    });
+}

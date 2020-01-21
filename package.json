@@ -17,8 +17,8 @@
     "url": "https://github.com/ahmeda47/note-taker/issues"
   },
   "homepage": "https://github.com/ahmeda47/note-taker#readme",
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "express": "^4.17.1"
-  }
+  },
+  "devDependencies": {}
 }

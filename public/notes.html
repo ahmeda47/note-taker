@@ -14,25 +14,38 @@
     <div class="container">
         <h1>Here are your notes.</h1>
         <div class="list-container">
-            <div class="listgroup">
-                <div class="note-title"></div>
-                <textarea name="" class="note-textarea" cols="30" rows="10"></textarea>            
-            </div>
+            <div class="note-group"></div>
         </div>
     </div>
     <script>
-        const listGroup = $('')
         function runNotesQuery(){
             $.ajax({
                 url:'api/notes',
                 method:'GET'
             }).then((notesData) => {
-                $('.note-title').text(notesData[0].title);
-                $('.note-textarea').text(notesData[0].description);
+                const noteGroup = $('.note-group');
+                const createNote = $('<div>')
+
+                notesData.forEach(element => {
+                    createNote.append(
+                        $('<li>').text(element.title),
+                        $('<textarea>').text(element.description),
+                        $('<button>').text('delete').on('click',() => {
+                            $.ajax(
+                            {url:'api/notes',
+                             method:'DELETE',
+                             data:{title: element.title, description: element.description}
+                            })
+                             .then(() => {
+                                //delete div
+                            })
+                        })
+                    );
+                });
+                noteGroup.append(createNote);
             })
         }
         runNotesQuery();
-    
     </script>
 </body>
 </html>

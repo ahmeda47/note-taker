@@ -1,4 +1,4 @@
-const noteData = require('../db/notes');
+let noteData = require('../db/notes');
 
 module.exports = function(app){
     app.get('/api/notes', (req, res) => {
@@ -10,12 +10,17 @@ module.exports = function(app){
     });
     app.delete('/api/notes', (req, res) => {
         console.log(req.body);
-        noteData.map(x => {
+        console.log(noteData);
+        let temp = noteData.map(x => {
             if (x.title === req.body.title && x.description === req.body.description){
-                x.title.textContent === '' && x.description.textContent === '';
+                return false;
                 console.log(x.title);
+            } else {
+                return x;
             }
         });
-        res.send('deleted data from api');
+
+        noteData = temp;
+        res.send(noteData);
     });
 }

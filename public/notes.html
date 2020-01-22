@@ -36,7 +36,8 @@
                              method:'DELETE',
                              data:{title: element.title, description: element.description}
                             })
-                             .then(() => {
+                             .then((res) => {
+                                 console.log(res);
                                 //delete div
                             })
                         })

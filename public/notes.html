@@ -16,6 +16,8 @@
         <div class="list-container">
             <div class="note-group"></div>
         </div>
+        <a href="/"><button class="btn btn-primary">Add more notes</button></a>
+
     </div>
     <script>
         function runNotesQuery(){
@@ -27,7 +29,7 @@
                 const createNote = $('<div>')
 
                 notesData.forEach(element => {
-                    createNote.append(
+                        createNote.append(
                         $('<li>').text(element.title),
                         $('<textarea>').text(element.description),
                         $('<button>').text('delete').on('click',() => {
@@ -36,9 +38,9 @@
                              method:'DELETE',
                              data:{title: element.title, description: element.description}
                             })
-                             .then((res) => {
-                                 console.log(res);
-                                //delete div
+                             .then(() => {
+                                 //console.log(res);
+                                    location.reload();
                             })
                         })
                     );
